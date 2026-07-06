@@ -1,208 +1,140 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from "react";
+import { cn } from "../utils/cn";
+import { WHATSAPP } from "../lib/wa";
+import { IconLeaf, IconMenu, IconClose, IconWhatsapp } from "./Icons";
 
-const navLinks = [
-  { label: 'Inicio', href: '#inicio' },
-  { label: 'Servicios', href: '#servicios' },
-  { label: 'Precios', href: '#precios' },
-  { label: 'Peinados', href: '#peinados' },
-  { label: 'Galería', href: '#galeria' },
-  { label: 'Ubicación', href: '#ubicacion' },
-  { label: 'Preguntas', href: '#faq' },
+const LINKS = [
+  { label: "Inicio", href: "#inicio" },
+  { label: "Servicios", href: "#servicios" },
+  { label: "Precios", href: "#precios" },
+  { label: "Peinados", href: "#peinados" },
+  { label: "Galería", href: "#galeria" },
+  { label: "Ubicación", href: "#ubicacion" },
+  { label: "Preguntas", href: "#preguntas" },
 ];
-
-const WA_URL = 'https://wa.me/595984411521?text=Hola%20buenas%2C%20quiero%20consultar%20por%20un%20turno%20en%20Ewa%20Beauty%20Experience';
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
-    setMenuOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   return (
-    <>
-      <motion.header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? 'bg-olive-900/95 backdrop-blur-md shadow-2xl shadow-black/30 border-b border-white/5'
-            : 'bg-transparent'
-        }`}
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-20">
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+        scrolled
+          ? "bg-forest/85 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.6)] backdrop-blur-md"
+          : "bg-transparent"
+      )}
+    >
+      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 lg:px-8">
+        {/* Logo */}
+        <a
+          href="#inicio"
+          className="group flex items-center gap-2.5 text-cream"
+          onClick={() => setOpen(false)}
+        >
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold/15 text-gold ring-1 ring-gold/30 transition-colors group-hover:bg-gold/25">
+            <IconLeaf className="h-5 w-5" />
+          </span>
+          <span className="flex flex-col leading-none">
+            <span className="font-serif text-lg font-semibold tracking-wide text-cream">
+              Ewa
+            </span>
+            <span className="text-[10px] font-light uppercase tracking-[0.32em] text-gold/80">
+              Beauty Experience
+            </span>
+          </span>
+        </a>
 
-            {/* Logo */}
-            <a
-              href="#inicio"
-              onClick={(e) => { e.preventDefault(); handleNavClick('#inicio'); }}
-              className="flex flex-col leading-none group"
-            >
-              <span
-                className="text-gold-400 font-serif text-lg sm:text-xl tracking-widest uppercase"
-                style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '0.15em' }}
-              >
-                Ewa
-              </span>
-              <span
-                className="text-cream-100 text-[0.55rem] sm:text-[0.6rem] tracking-[0.3em] uppercase font-light mt-[-2px]"
-                style={{ fontFamily: "'Inter', sans-serif" }}
-              >
-                Beauty Experience
-              </span>
-            </a>
-
-            {/* Desktop nav */}
-            <nav className="hidden xl:flex items-center gap-6 2xl:gap-8">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                  className="nav-link text-cream-200 hover:text-cream-50 text-sm tracking-wide transition-colors duration-200"
-                  style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400 }}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-
-            {/* Desktop CTA */}
-            <div className="hidden xl:flex items-center gap-4">
+        {/* Desktop links */}
+        <ul className="hidden items-center gap-7 lg:flex">
+          {LINKS.map((l) => (
+            <li key={l.href}>
               <a
-                href={WA_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-gold-400 hover:bg-gold-300 text-olive-900 px-5 py-2.5 rounded-full text-sm font-medium tracking-wide transition-all duration-300 hover:shadow-lg hover:shadow-gold-400/25 hover:-translate-y-0.5"
-                style={{ fontFamily: "'Inter', sans-serif" }}
+                href={l.href}
+                className="group relative text-sm font-light tracking-wide text-cream/85 transition-colors hover:text-cream"
               >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                </svg>
-                Reservar por WhatsApp
+                {l.label}
+                <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-gold transition-all duration-300 group-hover:w-full" />
               </a>
-            </div>
+            </li>
+          ))}
+        </ul>
 
-            {/* Mobile / tablet: WA icon + hamburger */}
-            <div className="flex xl:hidden items-center gap-3">
-              <a
-                href={WA_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-9 h-9 rounded-full bg-gold-400 text-olive-900 shadow-md"
-                aria-label="Reservar por WhatsApp"
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                </svg>
-              </a>
-              <button
-                onClick={() => setMenuOpen(!menuOpen)}
-                className="flex flex-col gap-1.5 p-2 rounded-md"
-                aria-label="Menú"
-              >
-                <motion.span
-                  className="block w-5 h-0.5 bg-cream-100 rounded-full"
-                  animate={menuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-                  transition={{ duration: 0.25 }}
-                />
-                <motion.span
-                  className="block w-5 h-0.5 bg-cream-100 rounded-full"
-                  animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
-                  transition={{ duration: 0.2 }}
-                />
-                <motion.span
-                  className="block w-5 h-0.5 bg-cream-100 rounded-full"
-                  animate={menuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-                  transition={{ duration: 0.25 }}
-                />
-              </button>
-            </div>
-          </div>
-        </div>
-      </motion.header>
-
-      {/* Mobile Menu Drawer */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            className="fixed inset-0 z-40 xl:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+        {/* Right side */}
+        <div className="flex items-center gap-3">
+          <a
+            href={WHATSAPP.general}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-sm font-medium text-forest shadow-[0_12px_30px_-12px_rgba(199,168,107,0.7)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold-soft sm:inline-flex"
           >
-            <div
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-              onClick={() => setMenuOpen(false)}
-            />
-            <motion.nav
-              className="absolute top-0 right-0 h-full w-72 bg-olive-900 shadow-2xl flex flex-col pt-20 pb-8 px-8"
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
-            >
-              <div className="mb-8">
-                <div className="gold-divider mb-6" />
-                <p className="text-gold-400 text-xs tracking-[0.2em] uppercase font-light mb-1"
-                   style={{ fontFamily: "'Inter', sans-serif" }}>
-                  Ewa
-                </p>
-                <p className="text-cream-200 text-[0.6rem] tracking-[0.25em] uppercase"
-                   style={{ fontFamily: "'Inter', sans-serif" }}>
-                  Beauty Experience
-                </p>
-                <div className="gold-divider mt-6" />
-              </div>
+            <IconWhatsapp className="h-4 w-4" />
+            Reservar
+          </a>
 
-              <div className="flex flex-col gap-1">
-                {navLinks.map((link, i) => (
-                  <motion.a
-                    key={link.href}
-                    href={link.href}
-                    onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                    className="text-cream-200 hover:text-gold-400 py-3 text-base tracking-wide transition-colors duration-200 border-b border-white/5"
-                    style={{ fontFamily: "'Inter', sans-serif" }}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.06 + 0.1 }}
-                  >
-                    {link.label}
-                  </motion.a>
-                ))}
-              </div>
+          <button
+            type="button"
+            aria-label="Abrir menú"
+            onClick={() => setOpen((v) => !v)}
+            className="flex h-10 w-10 items-center justify-center rounded-full text-cream ring-1 ring-gold/30 transition-colors hover:bg-gold/10 lg:hidden"
+          >
+            {open ? <IconClose className="h-5 w-5" /> : <IconMenu className="h-5 w-5" />}
+          </button>
+        </div>
+      </nav>
 
-              <div className="mt-auto">
-                <a
-                  href={WA_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 bg-gold-400 hover:bg-gold-300 text-olive-900 px-6 py-3.5 rounded-full text-sm font-medium tracking-wide transition-all duration-300 w-full"
-                  style={{ fontFamily: "'Inter', sans-serif" }}
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                  </svg>
-                  Reservar por WhatsApp
-                </a>
-              </div>
-            </motion.nav>
-          </motion.div>
+      {/* Mobile menu */}
+      <div
+        className={cn(
+          "overflow-hidden transition-all duration-500 lg:hidden",
+          open ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0"
         )}
-      </AnimatePresence>
-    </>
+      >
+        <div className="mx-4 mb-4 rounded-3xl bg-forest/95 p-4 shadow-card ring-1 ring-gold/15 backdrop-blur-md">
+          <ul className="flex flex-col">
+            {LINKS.map((l, i) => (
+              <li key={l.href}>
+                <a
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className={cn(
+                    "flex items-center justify-between border-b border-gold/10 py-3 text-base text-cream/90 transition-colors last:border-none hover:text-gold",
+                    i === 0 && "pt-1"
+                  )}
+                >
+                  {l.label}
+                  <span className="text-gold/40">→</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={WHATSAPP.general}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
+            className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-gold px-5 py-3.5 text-sm font-medium text-forest"
+          >
+            <IconWhatsapp className="h-4 w-4" />
+            Reservar por WhatsApp
+          </a>
+        </div>
+      </div>
+    </header>
   );
 }

@@ -1,48 +1,35 @@
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import Reveal from "./Reveal";
+import { IconNail, IconSparkle, IconBrush, IconScissors, IconPin, IconWhatsapp } from "./Icons";
 
-const benefits = [
-  { icon: '💅', label: 'Uñas y belleza' },
-  { icon: '👑', label: 'Peinados especiales' },
-  { icon: '💨', label: 'Brushing y secados' },
-  { icon: '✂️', label: 'Corte con asesoría' },
-  { icon: '📍', label: 'Atención en Lambaré' },
-  { icon: '💬', label: 'Reservas por WhatsApp' },
+const BENEFITS = [
+  { icon: IconNail, label: "Uñas y belleza" },
+  { icon: IconSparkle, label: "Peinados especiales" },
+  { icon: IconBrush, label: "Brushing y secados" },
+  { icon: IconScissors, label: "Corte con asesoría" },
+  { icon: IconPin, label: "Atención en Lambaré" },
+  { icon: IconWhatsapp, label: "Reservas por WhatsApp" },
 ];
 
 export default function BenefitBar() {
-  const { ref, visible } = useScrollReveal(0.1);
-
   return (
-    <section
-      ref={ref}
-      className="relative z-10 py-5 sm:py-6 overflow-hidden"
-      style={{ background: '#FAF7F0', borderTop: '1px solid #E8DDCB', borderBottom: '1px solid #E8DDCB' }}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-px" style={{ background: '#E8DDCB' }}>
-          {benefits.map((b, i) => (
-            <div
-              key={b.label}
-              className="flex flex-col items-center justify-center gap-1.5 sm:gap-2 px-2 sm:px-4 py-3 sm:py-4 text-center transition-all duration-300 group cursor-default min-h-[4.5rem] sm:min-h-0"
-              style={{
-                background: '#FAF7F0',
-                opacity: visible ? 1 : 0,
-                transform: visible ? 'translateY(0)' : 'translateY(16px)',
-                transition: `opacity 0.5s ease ${i * 0.08}s, transform 0.5s ease ${i * 0.08}s, background 0.2s`,
-              }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#F4EFE6'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#FAF7F0'; }}
-            >
-              <span className="text-xl sm:text-2xl">{b.icon}</span>
-              <span
-                className="text-[0.65rem] sm:text-xs tracking-wide leading-tight"
-                style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, color: '#263322' }}
+    <section className="relative z-10 -mt-8 lg:-mt-14">
+      <div className="mx-auto max-w-6xl px-5 lg:px-8">
+        <Reveal variant="up">
+          <div className="grid grid-cols-2 overflow-hidden rounded-3xl bg-olive shadow-card ring-1 ring-gold/15 sm:grid-cols-3 lg:grid-cols-6">
+            {BENEFITS.map(({ icon: Icon, label }, i) => (
+              <div
+                key={label}
+                style={{ "--i": i } as React.CSSProperties}
+                className="stagger group flex flex-col items-center justify-center gap-2.5 border-b border-gold/10 px-3 py-5 text-center transition-colors hover:bg-forest sm:border-b-0 sm:[&:not(:last-child)]:border-r lg:[&:not(:last-child)]:border-r"
               >
-                {b.label}
-              </span>
-            </div>
-          ))}
-        </div>
+                <Icon className="h-7 w-7 text-gold transition-transform duration-300 group-hover:scale-110" />
+                <span className="text-[13px] font-light leading-tight text-cream/85">
+                  {label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   );

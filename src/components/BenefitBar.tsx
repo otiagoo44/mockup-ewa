@@ -15,7 +15,7 @@ export default function BenefitBar() {
   return (
     <section
       ref={ref}
-      className="py-6 overflow-hidden"
+      className="relative z-10 py-5 sm:py-6 overflow-hidden"
       style={{ background: '#FAF7F0', borderTop: '1px solid #E8DDCB', borderBottom: '1px solid #E8DDCB' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -23,7 +23,7 @@ export default function BenefitBar() {
           {benefits.map((b, i) => (
             <div
               key={b.label}
-              className="flex flex-col sm:flex-row items-center gap-2 px-4 py-4 text-center sm:text-left transition-all duration-300 group cursor-default"
+              className="flex flex-col items-center justify-center gap-1.5 sm:gap-2 px-2 sm:px-4 py-3 sm:py-4 text-center transition-all duration-300 group cursor-default min-h-[4.5rem] sm:min-h-0"
               style={{
                 background: '#FAF7F0',
                 opacity: visible ? 1 : 0,
@@ -33,9 +33,9 @@ export default function BenefitBar() {
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#F4EFE6'; }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#FAF7F0'; }}
             >
-              <span className="text-2xl">{b.icon}</span>
+              <span className="text-xl sm:text-2xl">{b.icon}</span>
               <span
-                className="text-xs tracking-wide leading-tight"
+                className="text-[0.65rem] sm:text-xs tracking-wide leading-tight"
                 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, color: '#263322' }}
               >
                 {b.label}

@@ -17,7 +17,7 @@ export default function FloatingWA() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Reservar por WhatsApp"
-      className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-2xl transition-all duration-400"
+      className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full shadow-2xl transition-all duration-400"
       style={{
         background: 'linear-gradient(135deg, #25D366, #128C7E)',
         transform: visible ? 'scale(1) translateY(0)' : 'scale(0.8) translateY(20px)',

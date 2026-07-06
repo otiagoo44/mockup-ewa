@@ -19,7 +19,7 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-[100dvh] overflow-hidden"
       style={{ background: 'linear-gradient(135deg, #0f1a0d 0%, #182417 35%, #263322 65%, #1e2e1c 100%)' }}
     >
       {/* Botanical SVG background decoration */}
@@ -45,33 +45,31 @@ export default function Hero() {
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-32 lg:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 sm:pt-28 sm:pb-20 lg:pt-32 lg:pb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
           {/* LEFT: Text */}
-          <div className="text-center lg:text-left">
+          <div className="text-center lg:text-left order-2 lg:order-1">
             <FadeUp delay={0.1}>
-              <div className="inline-flex items-center gap-2 mb-6">
-                <span className="inline-block w-2 h-2 rounded-full" style={{ background: '#C7A86B' }} />
+              <div className="inline-flex flex-wrap items-center justify-center lg:justify-start gap-x-2 gap-y-1 mb-5 sm:mb-6">
+                <span className="inline-block w-2 h-2 rounded-full shrink-0" style={{ background: '#C7A86B' }} />
                 <span
-                  className="text-xs tracking-[0.25em] uppercase"
+                  className="text-[0.65rem] sm:text-xs tracking-[0.2em] sm:tracking-[0.25em] uppercase"
                   style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, color: '#C7A86B' }}
                 >
                   Beauty studio · Uñas · Capilar · Peinados
                 </span>
-                <span className="inline-block w-2 h-2 rounded-full" style={{ background: '#C7A86B' }} />
+                <span className="inline-block w-2 h-2 rounded-full shrink-0" style={{ background: '#C7A86B' }} />
               </div>
             </FadeUp>
 
             <FadeUp delay={0.2}>
               <h1
-                className="text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.15] mb-5"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.4rem] leading-[1.15] mb-4 sm:mb-5"
                 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500, color: '#FAF7F0' }}
               >
                 Tu espacio de{' '}
-                <em
-                  style={{ fontStyle: 'italic', fontWeight: 400, color: '#C7A86B' }}
-                >
+                <em style={{ fontStyle: 'italic', fontWeight: 400, color: '#C7A86B' }}>
                   belleza
                 </em>{' '}
                 y bienestar en Lambaré
@@ -80,7 +78,7 @@ export default function Hero() {
 
             <FadeUp delay={0.3}>
               <p
-                className="text-base sm:text-lg leading-relaxed mb-4 max-w-lg mx-auto lg:mx-0"
+                className="text-sm sm:text-base md:text-lg leading-relaxed mb-4 max-w-lg mx-auto lg:mx-0"
                 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300, color: '#8fa07a' }}
               >
                 En Ewa Beauty Experience encontrás servicios de uñas, lavado capilar, brushing, cortes y peinados especiales, con atención profesional y reservas por WhatsApp.
@@ -89,7 +87,7 @@ export default function Hero() {
 
             <FadeUp delay={0.4}>
               <p
-                className="text-sm tracking-wider italic mb-8"
+                className="text-sm tracking-wider italic mb-6 sm:mb-8"
                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 300, letterSpacing: '0.08em', color: '#E8DDCB' }}
               >
                 "La belleza se planifica, el resultado se disfruta."
@@ -97,12 +95,12 @@ export default function Hero() {
             </FadeUp>
 
             <FadeUp delay={0.5}>
-              <div className="flex flex-col sm:flex-row items-center gap-3 justify-center lg:justify-start mb-10">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 justify-center lg:justify-start mb-8 sm:mb-10">
                 <a
                   href={WA_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2.5 px-7 py-3.5 rounded-full text-sm font-medium tracking-wide transition-all duration-300 w-full sm:w-auto justify-center animate-glow"
+                  className="flex items-center gap-2.5 px-6 sm:px-7 py-3.5 rounded-full text-sm font-medium tracking-wide transition-all duration-300 justify-center animate-glow"
                   style={{
                     fontFamily: "'Inter', sans-serif",
                     background: '#C7A86B',
@@ -117,7 +115,7 @@ export default function Hero() {
                 <a
                   href="#servicios"
                   onClick={e => { e.preventDefault(); document.querySelector('#servicios')?.scrollIntoView({ behavior: 'smooth' }); }}
-                  className="flex items-center gap-2 px-7 py-3.5 rounded-full text-sm tracking-wide transition-all duration-300 w-full sm:w-auto justify-center"
+                  className="flex items-center gap-2 px-6 sm:px-7 py-3.5 rounded-full text-sm tracking-wide transition-all duration-300 justify-center"
                   style={{
                     fontFamily: "'Inter', sans-serif",
                     fontWeight: 400,
@@ -142,17 +140,21 @@ export default function Hero() {
             </FadeUp>
 
             <FadeUp delay={0.6}>
-              <div className="grid grid-cols-2 gap-3 max-w-sm mx-auto lg:mx-0">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 max-w-md mx-auto lg:mx-0">
                 {[
                   { icon: '🕐', text: 'Atención 09:00 a 20:00' },
                   { icon: '📍', text: 'Ubicación en Lambaré' },
                   { icon: '💰', text: 'Catálogo de precios claro' },
                   { icon: '💬', text: 'Turnos por WhatsApp' },
                 ].map((b) => (
-                  <div key={b.text} className="flex items-center gap-2 text-left">
+                  <div
+                    key={b.text}
+                    className="flex items-center gap-2.5 text-left px-3 py-2 rounded-lg"
+                    style={{ background: 'rgba(255,255,255,0.04)' }}
+                  >
                     <span className="text-base shrink-0">{b.icon}</span>
                     <span
-                      className="text-xs leading-snug"
+                      className="text-xs sm:text-[0.8rem] leading-snug"
                       style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300, color: '#8fa07a' }}
                     >
                       {b.text}
@@ -165,17 +167,27 @@ export default function Hero() {
 
           {/* RIGHT: Visual */}
           <motion.div
-            className="relative flex justify-center lg:justify-end"
+            className="relative flex justify-center lg:justify-end order-1 lg:order-2 mt-2 lg:mt-0"
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.35, ease: 'easeOut' }}
           >
-            <div className="relative w-full max-w-md lg:max-w-lg">
+            <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-lg">
               {/* Decorative ring */}
               <div
-                className="absolute -inset-4 rounded-[2rem] opacity-20"
+                className="absolute -inset-3 sm:-inset-4 rounded-[2rem] opacity-20 pointer-events-none"
                 style={{ background: 'linear-gradient(135deg, #C7A86B, transparent)', border: '1px solid #C7A86B' }}
               />
+
+              {/* Top badge */}
+              <motion.div
+                className="absolute -top-3 right-2 sm:-top-4 sm:right-4 z-20 rounded-full px-3 py-2 text-xs font-medium shadow-lg whitespace-nowrap"
+                animate={{ y: [0, 5, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+                style={{ background: '#C7A86B', color: '#182417', fontFamily: "'Inter', sans-serif" }}
+              >
+                ✨ Beauty Studio
+              </motion.div>
 
               {/* Main placeholder */}
               <div
@@ -185,7 +197,7 @@ export default function Hero() {
                   boxShadow: '0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(199,168,107,0.15)',
                 }}
               >
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 z-10">
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 z-10 px-6">
                   <div
                     className="w-14 h-14 rounded-full flex items-center justify-center"
                     style={{ border: '1px solid rgba(199,168,107,0.4)' }}
@@ -196,7 +208,7 @@ export default function Hero() {
                     </svg>
                   </div>
                   <p
-                    className="text-xs tracking-[0.2em] uppercase text-center px-8"
+                    className="text-xs tracking-[0.2em] uppercase text-center"
                     style={{ color: 'rgba(181,196,160,0.7)' }}
                   >
                     Foto real del salón o clienta<br />en Ewa Beauty Experience
@@ -210,75 +222,58 @@ export default function Hero() {
                   className="absolute top-0 left-0 right-0 h-1/4"
                   style={{ background: 'linear-gradient(to bottom, rgba(24,36,23,0.4), transparent)' }}
                 />
-              </div>
 
-              {/* Floating info card */}
-              <motion.div
-                className="absolute -bottom-6 -left-4 sm:-left-8 rounded-2xl px-4 py-3.5 shadow-2xl"
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                style={{
-                  background: '#1e2e1c',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  backdropFilter: 'blur(8px)',
-                  boxShadow: '0 20px 50px rgba(0,0,0,0.4), 0 0 0 1px rgba(199,168,107,0.1)',
-                }}
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                  <span className="text-xs tracking-wide" style={{ color: '#4ade80', fontFamily: "'Inter', sans-serif" }}>
-                    Abierto ahora
-                  </span>
-                </div>
-                <div className="text-xs mb-1" style={{ color: '#E8DDCB', fontFamily: "'Inter', sans-serif" }}>
-                  <span style={{ color: '#C7A86B' }}>🕐</span> 09:00 – 20:00
-                </div>
-                <div className="text-xs mb-2" style={{ color: '#E8DDCB', fontFamily: "'Inter', sans-serif" }}>
-                  <span style={{ color: '#C7A86B' }}>📍</span> Av. Cacique Lambaré
-                </div>
-                <div className="gold-divider mb-2" />
-                <p
-                  className="text-[0.65rem] tracking-[0.1em]"
-                  style={{ color: '#b5c4a0', fontFamily: "'Inter', sans-serif" }}
+                {/* Info card — inside image, no overflow */}
+                <motion.div
+                  className="absolute bottom-4 left-4 right-4 sm:right-auto sm:max-w-[210px] z-20 rounded-2xl px-4 py-3 shadow-2xl"
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                  style={{
+                    background: 'rgba(30, 46, 28, 0.92)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    backdropFilter: 'blur(8px)',
+                    boxShadow: '0 20px 50px rgba(0,0,0,0.4), 0 0 0 1px rgba(199,168,107,0.1)',
+                  }}
                 >
-                  Reservas por WhatsApp
-                </p>
-              </motion.div>
-
-              {/* Top badge */}
-              <motion.div
-                className="absolute -top-4 -right-2 sm:-right-6 rounded-full px-3 py-2 text-xs font-medium shadow-lg"
-                animate={{ y: [0, 5, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                style={{ background: '#C7A86B', color: '#182417', fontFamily: "'Inter', sans-serif" }}
-              >
-                ✨ Beauty Studio
-              </motion.div>
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0" />
+                    <span className="text-xs tracking-wide" style={{ color: '#4ade80', fontFamily: "'Inter', sans-serif" }}>
+                      Abierto ahora
+                    </span>
+                  </div>
+                  <div className="text-xs mb-0.5" style={{ color: '#E8DDCB', fontFamily: "'Inter', sans-serif" }}>
+                    <span style={{ color: '#C7A86B' }}>🕐</span> 09:00 – 20:00
+                  </div>
+                  <div className="text-xs" style={{ color: '#E8DDCB', fontFamily: "'Inter', sans-serif" }}>
+                    <span style={{ color: '#C7A86B' }}>📍</span> Av. Cacique Lambaré
+                  </div>
+                </motion.div>
+              </div>
             </div>
           </motion.div>
         </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.5 }}
-        >
-          <span
-            className="text-[0.6rem] tracking-[0.3em] uppercase"
-            style={{ color: 'rgba(181,196,160,0.5)', fontFamily: "'Inter', sans-serif" }}
-          >
-            Explorar
-          </span>
-          <div
-            className="scroll-indicator w-5 h-8 rounded-full flex items-start justify-center pt-1.5"
-            style={{ border: '1px solid rgba(255,255,255,0.2)' }}
-          >
-            <div className="w-1 h-2 rounded-full" style={{ background: 'rgba(199,168,107,0.7)' }} />
-          </div>
-        </motion.div>
       </div>
+
+      {/* Scroll indicator — anchored to section bottom */}
+      <motion.div
+        className="absolute bottom-5 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 hidden sm:flex flex-col items-center gap-2 pointer-events-none"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.5 }}
+      >
+        <span
+          className="text-[0.6rem] tracking-[0.3em] uppercase"
+          style={{ color: 'rgba(181,196,160,0.5)', fontFamily: "'Inter', sans-serif" }}
+        >
+          Explorar
+        </span>
+        <div
+          className="scroll-indicator w-5 h-8 rounded-full flex items-start justify-center pt-1.5"
+          style={{ border: '1px solid rgba(255,255,255,0.2)' }}
+        >
+          <div className="w-1 h-2 rounded-full" style={{ background: 'rgba(199,168,107,0.7)' }} />
+        </div>
+      </motion.div>
     </section>
   );
 }

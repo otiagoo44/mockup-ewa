@@ -29,6 +29,24 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+@media (min-width: 1024px) {
+  html {
+    scroll-padding-top: 5.5rem;
+  }
+}
+
+/* Anchor targets clear the fixed header */
+[id] {
+  scroll-margin-top: 5rem;
+}
+
+@media (min-width: 1024px) {
+  [id] {
+    scroll-margin-top: 5.5rem;
+  }
 }
 
 body {
@@ -37,6 +55,7 @@ body {
   color: #171717;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 /* Custom scrollbar */

@@ -65,7 +65,7 @@ export default function Header() {
             </a>
 
             {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center gap-8">
+            <nav className="hidden xl:flex items-center gap-6 2xl:gap-8">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
@@ -80,7 +80,7 @@ export default function Header() {
             </nav>
 
             {/* Desktop CTA */}
-            <div className="hidden lg:flex items-center gap-4">
+            <div className="hidden xl:flex items-center gap-4">
               <a
                 href={WA_URL}
                 target="_blank"
@@ -95,8 +95,8 @@ export default function Header() {
               </a>
             </div>
 
-            {/* Mobile right: WA icon + hamburger */}
-            <div className="flex lg:hidden items-center gap-3">
+            {/* Mobile / tablet: WA icon + hamburger */}
+            <div className="flex xl:hidden items-center gap-3">
               <a
                 href={WA_URL}
                 target="_blank"
@@ -138,7 +138,7 @@ export default function Header() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 lg:hidden"
+            className="fixed inset-0 z-40 xl:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

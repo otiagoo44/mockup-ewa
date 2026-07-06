@@ -209,7 +209,7 @@ export default function LocationContact() {
 
           {/* RIGHT: Map placeholder */}
           <div
-            className="rounded-2xl overflow-hidden"
+            className="rounded-2xl overflow-hidden min-h-[260px] sm:min-h-[320px] lg:min-h-0"
             style={{
               aspectRatio: '4/3',
               border: '1px solid rgba(199,168,107,0.15)',
